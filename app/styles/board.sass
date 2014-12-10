@@ -1,22 +1,59 @@
-$board-border: 1px solid black
+@mixin user-select($select)
+  -webkit-touch-callout: $select
+  -webkit-user-select: $select
+  -khtml-user-select: $select
+  -moz-user-select: $select
+  -ms-user-select: $select
+  user-select: $select
+
+$board-border: 8px solid #ecf0f1
+$subboard-border: 4px solid #ecf0f1
 
 .board
   position: relative
   width: 90vmin
   height: 90vmin
   margin: auto
+  color: #8e44ad
+  +user-select(none)
+  cursor: default
 
 
-.subboard, .subboard table
+.subboard
   width: 100%
   height: 100%
+
+.subboard table
+  width: 90%
+  height: 90%
+  margin: 5%
 
 .b0, .b1, .b3, .b4
   border-right: $board-border
   border-bottom: $board-border
 
+.sb0, .sb1, .sb3, .sb4
+  border-right: $subboard-border
+  border-bottom: $subboard-border
+
 .b2, .b5
   border-bottom: $board-border
 
+.sb2, .sb5
+  border-bottom: $subboard-border
+
 .b6, .b7
   border-right: $board-border
+
+.sb6, .sb7
+  border-right: $subboard-border
+
+.X
+  background: url(/images/X.svg)
+
+.O
+  background: url(/images/O.svg)
+
+.X, .O
+  background-size: contain
+  background-repeat: no-repeat
