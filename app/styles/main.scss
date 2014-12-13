@@ -3,6 +3,38 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
+@mixin user-select($select) {
+  -webkit-touch-callout: $select;
+  -webkit-user-select: $select;
+  -khtml-user-select: $select;
+  -moz-user-select: $select;
+  -ms-user-select: $select;
+  user-select: $select;
+}
+
+.centered {
+  margin: auto;
+  text-align: center;
+}
+
+.page {
+  @extend .centered;
+  width: 90vmin;
+  height: 90vmin;
+  margin: auto;
+  cursor: default;
+  @include user-select(none);
+}
+
+.logo {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.btns {
+  width: 40%;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

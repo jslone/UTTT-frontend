@@ -1,25 +1,10 @@
-@mixin user-select($select)
-  -webkit-touch-callout: $select
-  -webkit-user-select: $select
-  -khtml-user-select: $select
-  -moz-user-select: $select
-  -ms-user-select: $select
-  user-select: $select
-
 $board-border: 8px solid #ecf0f1
 $subboard-border: 4px solid #ecf0f1
 
 .board
-  position: relative
-  width: 90vmin
-  height: 90vmin
-  margin: auto
   color: #8e44ad
-  +user-select(none)
-  cursor: default
 
-
-.subboard
+.board, .subboard
   width: 100%
   height: 100%
 
