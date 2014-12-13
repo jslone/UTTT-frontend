@@ -35,6 +35,12 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
   width: 40%;
 }
 
+.btn-theme {
+  background-color: #72368A;
+  color: #ecf0f1;
+  margin-bottom:2px;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -44,6 +50,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 
 html, body {
   background-color: #8e44ad;
+  color: #ecf0f1;
 }
 
 /* Space out content a bit */
