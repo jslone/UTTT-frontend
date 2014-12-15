@@ -1,17 +1,17 @@
 'use strict'
 
-describe 'Controller: MainCtrl', ->
+describe 'Controller: GamecomputerCtrl', ->
 
   # load the controller's module
   beforeEach module 'utttApp'
 
-  MainCtrl = {}
+  GamecomputerCtrl = {}
   scope = {}
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    MainCtrl = $controller 'MainCtrl', {
+    GamecomputerCtrl = $controller 'GamecomputerCtrl', {
       $scope: scope
     }
 

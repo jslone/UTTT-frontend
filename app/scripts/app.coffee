@@ -22,8 +22,11 @@ angular
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
-      .when '/game/singleplayer',
+      .when '/game/computer',
         templateUrl: 'views/board.html'
-        controller: 'SinglePlayerCtrl'
+        controller: 'GameComputerCtrl'
+      .when '/game/offline',
+        templateUrl: 'views/board.html'
+        controller: 'GameOfflineCtrl'
       .otherwise
         redirectTo: '/'
