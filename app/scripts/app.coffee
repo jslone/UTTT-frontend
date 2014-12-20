@@ -1,5 +1,3 @@
-'use strict'
-
 ###*
  # @ngdoc overview
  # @name utttApp
@@ -8,6 +6,7 @@
  #
  # Main module of the application.
 ###
+
 angular
   .module('utttApp', [
     'ngAnimate',
@@ -21,7 +20,6 @@ angular
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
       .when '/game/computer',
         templateUrl: 'views/board.html'
         controller: 'GameComputerCtrl'
@@ -30,3 +28,9 @@ angular
         controller: 'GameOfflineCtrl'
       .otherwise
         redirectTo: '/'
+
+app = angular.module 'utttApp'
+require('./controllers/gamecomputer.coffee').init app
+require('./controllers/gameoffline.coffee').init app
+require('./controllers/gameonline.coffee').init app
+require('./directives/subboard.coffee').init app

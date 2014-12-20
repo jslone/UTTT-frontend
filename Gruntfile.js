@@ -33,9 +33,9 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      coffee: {
+      browserify: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:dist']
+        tasks: ['newer:browserify:dist']
       },
       coffeeTest: {
         files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
@@ -163,6 +163,17 @@ module.exports = function (grunt) {
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
+      }
+    },
+
+    browserify: {
+      dist: {
+        options: {
+          transform: ['coffeeify']
+        },
+        files: {
+          '.tmp/scripts/build.js' : ['<%= yeoman.app %>/scripts/**/*.coffee']
+        }
       }
     },
 
@@ -387,7 +398,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'coffee:dist',
+        'browserify:dist',
         'compass:server'
       ],
       test: [

@@ -1,19 +1,14 @@
 class Game
-  constuctor: (boardData) ->
-    if boardData?
-      @winner = boardData.winner
-      @board = boardData.board
-      @subboard = boardData.subboard
-      @activeSub = boardData.activeSub
-      @turn = boardData.turn
-      @players = boardData.players
-    else
-      @winner = ''
-      @board = ('' for i in [1..9])
-      @subboard = (('' for i in [1..9]) for i in [1..9])
-      @activeSub = -1
-      @turn = 0
-      @player = [{id:0,t:'X'},{id:1,t:'O'}]
+  winner: ''
+  board: ('' for i in [1..9])
+  subboard: (('' for i in [1..9]) for i in [1..9])
+  activeSub: -1
+  turn: 0
+  players: [{id:0,t:'X'},{id:1,t:'O'}]
+
+  constuctor: (args) ->
+    for v of args
+      this[v] = args[v]
 
   findWinner: (board) ->
     wins = [
@@ -28,17 +23,27 @@ class Game
     ]
     open = false
     for win in wins
-      if board[win[0]] != '' && board[win[0]] != 'C'
-        if board[win[0]] == board[win[1]] && board[win[0]] == board[win[2]]
-          return board[win[0]]
+      [i,j,k] = win
+      if board[i] != '' && board[i] != 'C'
+        if board[i] == board[j] && board[i] == board[k]
+          return board[i]
       else
-        open = board[win[0]] != 'C'
-    return open ? '' : 'C'
+        open = board[i] == '' || board[j] == '' || board[k] == ''
+    return if open then '' else 'C'
 
-  move: (i,j,pid) ->
-    if pid == @player[@turn].id && (i == @activeSub || @activeSub < 0)
-      if @subboard[i][j] == ''
-        @subboard[i][j] = t
-        @board[i] = findWinner @subboard[i]
-        @winner = findWinner @board
-        @turn = (@turn + 1)%2
+  canMove: (i,j,player) ->
+    player.id == @players[@turn].id && (i == @activeSub || @activeSub < 0) && @subboard[i][j] == ''
+
+  move: (i,j,player) ->
+    if @canMove i,j,player
+      @subboard[i][j] = player.t
+      @board[i] = @findWinner @subboard[i]
+      console.log @board[i]
+      @activeSub = if @board[i] == '' then j else -1
+      @winner = @findWinner @board
+      @turn = (@turn + 1) % @players.length
+      return true
+    return false
+
+module.exports =
+  Game: Game
