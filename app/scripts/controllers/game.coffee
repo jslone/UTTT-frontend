@@ -38,9 +38,9 @@ module.exports =
           Games.get {id:$routeParams.id}, (game) ->
             $scope.game = new Game game
             $scope.move = moveFn
+            # send move to server
             $scope.endTurn = (i,j) ->
               game.$move {i:i,j:j}
           # social network player info
           $scope.player = $scope.game.players[0]
-          # send move to server
     ]
