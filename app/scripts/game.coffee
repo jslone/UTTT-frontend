@@ -4,7 +4,7 @@ class Game
   subboard: (('' for i in [1..9]) for i in [1..9])
   activeSub: -1
   turn: 0
-  players: [{id:0,t:'X'},{id:1,t:'O'}]
+  players: [{id:0,t:'X',name:'X'},{id:1,t:'O',name:'O'}]
 
   constuctor: (args) ->
     for v of args

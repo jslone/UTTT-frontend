@@ -1,37 +1,55 @@
 $board-border: 8px solid #ecf0f1
 $subboard-border: 4px solid #ecf0f1
 
+.game-container
+  display: flex
+  flex-flow: row wrap
+  justify-content: center
+
+.turn
+  margin-top: auto
+  margin-bottom: auto
+  margin-right: 20px
+
 .board
   color: #8e44ad
+  width: 90vmin
+  height: 90vmin
 
-.board, .subboard
+.subboard
   width: 100%
   height: 100%
 
-.subboard table
+.subboard
   width: 90%
   height: 90%
-  margin: 5%
+  margin: auto
 
-.b0, .b1, .b3, .b4
-  border-right: $board-border
-  border-bottom: $board-border
+.subboard table
+  width: 100%
+  height: 100%
 
-.sb0, .sb1, .sb3, .sb4
-  border-right: $subboard-border
-  border-bottom: $subboard-border
+.board td, .board tr
+  width: 1 / 3 * 100%
+  height: 1 / 3 * 100%
 
-.b2, .b5
-  border-bottom: $board-border
+.b0, .b1, .b2, .b3, .b4, .b5, .b6, .b7, .b8
+  border: $board-border
 
-.sb2, .sb5
-  border-bottom: $subboard-border
+.sb0, .sb1, .sb2, .sb3, .sb4, .sb5, .sb6, .sb7, .sb8
+  border: $subboard-border
 
-.b6, .b7
-  border-right: $board-border
+.b0, .b1, .b2, .sb0, .sb1, .sb2
+  border-top: none
 
-.sb6, .sb7
-  border-right: $subboard-border
+.b6, .b7, .b8, .sb6, .sb7, .sb8
+  border-bottom: none
+
+.b0, .b3, .b6, .sb0, .sb3, .sb6
+  border-left: none
+
+.b2, .b5, .b8, .sb2, .sb5, .sb8
+  border-right: none
 
 .X
   background: url(/images/X.svg)
