@@ -20,17 +20,12 @@ angular
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
-      .when '/game/computer',
+      .when '/game/:id',
         templateUrl: 'views/board.html'
-        controller: 'GameComputerCtrl'
-      .when '/game/offline',
-        templateUrl: 'views/board.html'
-        controller: 'GameOfflineCtrl'
+        controller: 'GameCtrl'
       .otherwise
         redirectTo: '/'
 
 app = angular.module 'utttApp'
-require('./controllers/gamecomputer.coffee').init app
-require('./controllers/gameoffline.coffee').init app
-require('./controllers/gameonline.coffee').init app
+require('./controllers/game.coffee').init app
 require('./directives/subboard.coffee').init app

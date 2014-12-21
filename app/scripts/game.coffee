@@ -6,9 +6,7 @@ class Game
   turn: 0
   players: [{id:0,t:'X',name:'X'},{id:1,t:'O',name:'O'}]
 
-  constuctor: (args) ->
-    for v of args
-      this[v] = args[v]
+  constuctor: ({@winner,@board,@subboard,@activeSub,@turn,@players}) ->
 
   findWinner: (board) ->
     wins = [
@@ -38,7 +36,6 @@ class Game
     if @canMove i,j,player
       @subboard[i][j] = player.t
       @board[i] = @findWinner @subboard[i]
-      console.log @board[i]
       @activeSub = if @board[i] == '' then j else -1
       @winner = @findWinner @board
       @turn = (@turn + 1) % @players.length
