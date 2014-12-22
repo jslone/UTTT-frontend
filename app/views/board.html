@@ -1,37 +1,37 @@
 <div class="game-container">
   <div class="turn"><h1>{{game.players[game.turn].name}}'s turn</h1></div>
-  <table class="board">
+  <table class="board {{game.board.t}}">
     <tr>
       <td class="b0">
-        <div class="subboard" move="move(0,j)" t="game.board[0]" board="game.subboard[0]"></div>
+        <div class="subboard" move="move(0,j)" board="game.board[0]"></div>
       </td>
       <td class="b1">
-        <div class="subboard" move="move(1,j)" t="game.board[1]" board="game.subboard[1]"></div>
+        <div class="subboard" move="move(1,j)" board="game.board[1]"></div>
       </td>
       <td class="b2">
-        <div class="subboard" move="move(2,j)" t="game.board[2]" board="game.subboard[2]"></div>
+        <div class="subboard" move="move(2,j)" board="game.board[2]"></div>
       </td>
     </tr>
     <tr>
       <td class="b3">
-        <div class="subboard" move="move(3,j)" t="game.board[3]" board="game.subboard[3]"></div>
+        <div class="subboard" move="move(3,j)" board="game.board[3]"></div>
       </td>
       <td  class="b4">
-        <div class="subboard" move="move(4,j)" t="game.board[4]" board="game.subboard[4]"></div>
+        <div class="subboard" move="move(4,j)" board="game.board[4]"></div>
       </td>
       <td  class="b5">
-        <div class="subboard" move="move(5,j)" t="game.board[5]" board="game.subboard[5]"></div>
+        <div class="subboard" move="move(5,j)" board="game.board[5]"></div>
       </td>
     </tr>
     <tr>
       <td  class="b6">
-        <div class="subboard" move="move(6,j)" t="game.board[6]" board="game.subboard[6]"></div>
+        <div class="subboard" move="move(6,j)" board="game.board[6]"></div>
       </td>
       <td  class="b7">
-        <div class="subboard" move="move(7,j)" t="game.board[7]" board="game.subboard[7]"></div>
+        <div class="subboard" move="move(7,j)" board="game.board[7]"></div>
       </td>
       <td  class="b8">
-        <div class="subboard" move="move(8,j)" t="game.board[8]" board="game.subboard[8]"></div>
+        <div class="subboard" move="move(8,j)" board="game.board[8]"></div>
       </td>
     </tr>
   </table>

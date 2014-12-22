@@ -10,8 +10,6 @@ module.exports =
       templateUrl: 'views/subboard.html'
       restrict: 'ACE'
       scope:
-        sbId: '@id'
         move: '&'
-        t: '='
         board: '='
     )

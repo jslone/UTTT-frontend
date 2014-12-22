@@ -19,6 +19,7 @@ module.exports =
         # local offline game
         if $routeParams.id <= 2
           $scope.game = new UTTT.Game()
+          console.log $scope.game
           # set player 1 as current player
           $scope.player = $scope.game.players[0]
           if $routeParams.id == '1'
