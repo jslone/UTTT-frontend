@@ -43,7 +43,7 @@ class Game
     if @canMove i,j,player
       @board[i][j].t = player.t
       @board[i].t = @findWinner @board[i]
-      @activeSub = if @board[i].t == '' then j else -1
+      @activeSub = if @board[j].t == '' then j else -1
       @board.t = @findWinner @board
       @turn = (@turn + 1) % @players.length
       return true
