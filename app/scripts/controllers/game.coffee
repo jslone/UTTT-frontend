@@ -19,12 +19,13 @@ module.exports =
         # local offline game
         if $routeParams.id <= 2
           $scope.game = new UTTT.Game()
-          console.log $scope.game
           # set player 1 as current player
           $scope.player = $scope.game.players[0]
           if $routeParams.id == '1'
             # let ai know it is its turn
             $scope.endTurn = () ->
+              move = @game.bestMove()
+              $scope.game.move move.i, move.j, $scope.game.players[1]
           if $routeParams.id == '2'
             # toggle current player
             $scope.endTurn = () ->
