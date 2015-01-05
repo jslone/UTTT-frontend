@@ -121,7 +121,7 @@ class Game
   bestMove: ->
     color = -2 * @turn + 1
     node = new GameNode this
-    AI.negamax node, 4, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, color
+    AI.negamax node, 10000, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, color
     node.bestDelta
 
 class GameNode

@@ -54,13 +54,21 @@ $subboard-border: 4px solid #ecf0f1
 .b2, .b5, .b8, .sb2, .sb5, .sb8
   border-right: none
 
-.X
+.X, .O
+  position: relative
+
+.X::after
   background: url(/images/X.svg)
 
-.O
+.O::after
   background: url(/images/O.svg)
 
-.X, .O
-  background-size: 90%
+.X::after, .O::after
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
   background-repeat: no-repeat
   background-position: center

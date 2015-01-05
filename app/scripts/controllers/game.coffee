@@ -24,8 +24,11 @@ module.exports =
           if $routeParams.id == '1'
             # let ai know it is its turn
             $scope.endTurn = () ->
-              move = @game.bestMove()
-              $scope.game.move move.i, move.j, $scope.game.players[1]
+              f = () ->
+                move = @game.bestMove()
+                $scope.game.move move.i, move.j, $scope.game.players[1]
+                $scope.$digest()
+              setTimeout (f.bind this),100
           if $routeParams.id == '2'
             # toggle current player
             $scope.endTurn = () ->
