@@ -1,5 +1,10 @@
 <div class="game-container">
-  <div class="turn"><h1>{{game.players[game.turn].name}}'s turn</h1></div>
+  <div class="turn">
+    <h1 ng-show="game.board.t == ''">{{game.players[game.turn].name}}'s turn</h1>
+    <h1 ng-show="game.board.t == 'X'">{{game.players[0].name}} won</h1>
+    <h1 ng-show="game.board.t == 'O'">{{game.players[1].name}} won</h1>
+    <h1 ng-show="game.board.t == 'C'">Tied</h1>
+  </div>
   <table class="board {{game.board.t}}">
     <tr>
       <td class="b0">
