@@ -172,7 +172,8 @@ module.exports = function (grunt) {
           transform: ['coffeeify']
         },
         files: {
-          '.tmp/scripts/build.js' : ['<%= yeoman.app %>/scripts/**/*.coffee']
+          '.tmp/scripts/build.js' : ['<%= yeoman.app %>/scripts/**/*.coffee'],
+          '.tmp/scripts/parai.js' : ['<%= yeoman.app %>/scripts/parallel.coffee']
         }
       }
     },

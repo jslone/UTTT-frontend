@@ -1,4 +1,5 @@
 UTTT = require '../game.coffee'
+Utils = require '../utils.coffee'
 
 module.exports =
   init: (module) ->
@@ -22,13 +23,16 @@ module.exports =
           # set player 1 as current player
           $scope.player = $scope.game.players[0]
           if $routeParams.id == '1'
+            # set up worker to play for computer
+            worker = new Worker '/scripts/parai.js'
+            worker.addEventListener 'message', (e) ->
+              {i,j} = e.data.move
+              $scope.game.move i, j, $scope.game.players[1]
+              $scope.$digest()
             # let ai know it is its turn
             $scope.endTurn = () ->
-              f = () ->
-                move = @game.bestMove()
-                $scope.game.move move.i, move.j, $scope.game.players[1]
-                $scope.$digest()
-              setTimeout (f.bind this),100
+              # signal ai worker
+              worker.postMessage {game: $scope.game}
           if $routeParams.id == '2'
             # toggle current player
             $scope.endTurn = () ->
