@@ -42,15 +42,15 @@ class Game
       @players = options.players
 
   findWinner: (board) ->
-    open = false
     for win in @wins
       [i,j,k] = win
       if board[i].t != '' && board[i].t != 'C'
         if board[i].t == board[j].t && board[i].t == board[k].t
           return board[i].t
-      else
-        open |= board[i].t == '' || board[j].t == '' || board[k].t == ''
-    return if open then '' else 'C'
+    for i in [0...9] by 1
+      if board[i].t == ''
+        return ''
+    return 'C'
 
   canMove: (i,j,player) ->
     player.id == @players[@turn].id &&
