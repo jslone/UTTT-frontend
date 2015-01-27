@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       browserify: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:browserify:dist']
+        tasks: ['newer:browserify:server']
       },
       coffeeTest: {
         files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
@@ -172,7 +172,16 @@ module.exports = function (grunt) {
           transform: ['coffeeify']
         },
         files: {
-          '.tmp/scripts/build.js' : ['<%= yeoman.app %>/scripts/**/*.coffee'],
+          '<%= yeoman.dist %>/scripts/app.js' : ['<%= yeoman.app %>/scripts/app.coffee'],
+          '<%= yeoman.dist %>/scripts/parai.js' : ['<%= yeoman.app %>/scripts/parallel.coffee']
+        }
+      },
+      server: {
+        options: {
+          transform: ['coffeeify']
+        },
+        files: {
+          '.tmp/scripts/app.js' : ['<%= yeoman.app %>/scripts/app.coffee'],
           '.tmp/scripts/parai.js' : ['<%= yeoman.app %>/scripts/parallel.coffee']
         }
       }
@@ -238,6 +247,7 @@ module.exports = function (grunt) {
       dist: {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
+          '!<%= yeoman.dist%>/scripts/parai.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
@@ -399,7 +409,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'browserify:dist',
+        'browserify:server',
         'compass:server'
       ],
       test: [
@@ -407,7 +417,7 @@ module.exports = function (grunt) {
         'compass'
       ],
       dist: [
-        'coffee',
+        'browserify:dist',
         'compass:dist',
         'imagemin',
         'svgmin'
@@ -471,7 +481,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    //'test',
     'build'
   ]);
 };
