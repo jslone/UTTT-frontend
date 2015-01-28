@@ -23,7 +23,7 @@ angular
       .when '/game/:id',
         templateUrl: 'views/board.html'
         controller: 'GameCtrl'
-      .when '/games'
+      .when '/games',
         templateUrl: 'views/games.html'
         controller: 'GamesCtrl'
       .otherwise
