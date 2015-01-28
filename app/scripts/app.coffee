@@ -14,9 +14,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'facebook'
   ])
-  .config ($routeProvider) ->
+  .config(['$routeProvider', ($routeProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
@@ -28,12 +29,10 @@ angular
         controller: 'GamesCtrl'
       .otherwise
         redirectTo: '/'
-
-angular.module('utttApp',[
-    'facebook'
   ])
-  .config (FacebookProvider) ->
+  .config(['FacebookProvider', (FacebookProvider) ->
     FacebookProvider.init '1046434812049317'
+  ])
 
 app = angular.module 'utttApp'
 
