@@ -32,7 +32,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 }
 
 .btns {
-  width: 40%;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  display: block;
 }
 
 .btn-theme {

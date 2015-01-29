@@ -11,17 +11,16 @@ module.exports =
       ($scope,Facebook) ->
         $scope.login = () ->
           Facebook.login (res) ->
-            console.log res
-          ,{scope:'user_friends,apprequests'}
+            if res.status == 'connected'
+              $scope.userID = res.authResponse.userID
+              $scope.load()
+          ,{scope:'user_friends'}
 
         $scope.getLoginStatus = () ->
           Facebook.getLoginStatus (res) ->
             if res.status == 'connected'
               $scope.userID = res.authResponse.userID
-              $scope.me()
-              $scope.getFriends()
-            else
-              $scope.login()
+              $scope.load()
 
         $scope.me = () ->
           Facebook.api '/me', (res) ->
@@ -29,14 +28,22 @@ module.exports =
 
         $scope.getFriends = () ->
           Facebook.api '/me/friends', (res) ->
-            console.log res
             $scope.friends = res.data
+            $scope.$digest()
 
         $scope.inviteFriends = () ->
           Facebook.ui
             method: 'apprequests'
             message: 'Lets play a game of Ultimate Tic Tac Toe!'
 
+        $scope.load = () ->
+          $scope.me()
+          $scope.getFriends()
+
+        $scope.setUserID = (id) ->
+          $scope.userID = id
+          $scope.$digest()
+          $scope.load()
 
         $scope.getLoginStatus()
     ]
