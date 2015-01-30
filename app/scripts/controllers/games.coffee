@@ -7,8 +7,8 @@ module.exports =
      # # AuthCtrl
      # Controller of the utttApp
     ###
-    module.controller 'GamesCtrl', ['$scope','$location','Facebook',
-      ($scope,$location,Facebook) ->
+    module.controller 'GamesCtrl', ['$scope','$location','$resource','Facebook',
+      ($scope,$location,$resource,Facebook) ->
         $scope.login = () ->
           Facebook.login (res) ->
             if res.status == 'connected'
