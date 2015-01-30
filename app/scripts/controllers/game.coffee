@@ -51,5 +51,5 @@ module.exports =
             $scope.endTurn = (i,j) ->
               game.$move {i:i,j:j}
           # social network player info
-          $scope.player = $scope.game.players[0]
+          $scope.player = $scope.user
     ]
