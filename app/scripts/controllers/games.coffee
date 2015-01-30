@@ -7,8 +7,8 @@ module.exports =
      # # AuthCtrl
      # Controller of the utttApp
     ###
-    module.controller 'GamesCtrl', ['$scope','Facebook',
-      ($scope,Facebook) ->
+    module.controller 'GamesCtrl', ['$scope','$location','Facebook',
+      ($scope,$location,Facebook) ->
         $scope.login = () ->
           Facebook.login (res) ->
             if res.status == 'connected'
@@ -25,6 +25,7 @@ module.exports =
         $scope.me = () ->
           Facebook.api '/me', (res) ->
             $scope.user = res
+            $scope.user.id = $scope.user.userID
 
         $scope.getFriends = () ->
           Facebook.api '/me/friends', (res) ->
@@ -44,6 +45,16 @@ module.exports =
           $scope.userID = id
           $scope.$digest()
           $scope.load()
+
+        $scope.newGame = (friend) ->
+          Games = $resource '/game/:id', {}, {move: {method: 'POST'}}
+          $scope.user.t = 'X'
+          friend.id = friend.userID
+          friend.t = 'O'
+          newGame = new Games {players:[$scope.user,friend]}
+          newGame.$save (u) ->
+            $location.path '/game/' + u.id
+
 
         $scope.getLoginStatus()
     ]
