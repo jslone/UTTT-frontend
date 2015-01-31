@@ -31,12 +31,12 @@ class Game
 
   constructor: (options = null) ->
     if options == null
-      @board = Utils.add (Utils.add ({t:''} for i in [1..9]), {t:''} for i in [1..9]), {t:''}
+      @board = {t: '', d: ({t:'', d: ({t:''} for i in [1..9])} for i in [1..9])}
       @activeSub = -1
       @turn = 0
       @players = [{id:0,t:'X',name:'X'},{id:1,t:'O',name:'O'}]
     else
-      @board = Utils.add (Utils.add ({t:i.t} for i in sub), {t:sub.t} for sub in options.board), {t:options.board.t}
+      @board = {t:options.board.t, d: ({t:sub.t, d: ({t:i.t} for i in sub.d)} for sub in options.board.d)}
       @activeSub = options.activeSub
       @turn = options.turn
       @players = options.players
@@ -44,25 +44,25 @@ class Game
   findWinner: (board) ->
     for win in @wins
       [i,j,k] = win
-      if board[i].t != '' && board[i].t != 'C'
-        if board[i].t == board[j].t && board[i].t == board[k].t
-          return board[i].t
+      if board.d[i].t != '' && board.d[i].t != 'C'
+        if board.d[i].t == board.d[j].t && board.d[i].t == board.d[k].t
+          return board.d[i].t
     for i in [0...9] by 1
-      if board[i].t == ''
+      if board.d[i].t == ''
         return ''
     return 'C'
 
   canMove: (i,j,player) ->
     player.id == @players[@turn].id &&
     (i == @activeSub || @activeSub < 0) &&
-    @board[i][j].t == '' &&
+    @board.d[i].d[j].t == '' &&
     @board.t == ''
 
   move: (i,j,player = @players[@turn]) ->
     if @canMove i,j,player
-      @board[i][j].t = player.t
-      @board[i].t = @findWinner @board[i]
-      @activeSub = if @board[j].t == '' then j else -1
+      @board.d[i].d[j].t = player.t
+      @board.d[i].t = @findWinner @board.d[i]
+      @activeSub = if @board.d[j].t == '' then j else -1
       @board.t = @findWinner @board
       @turn = (@turn + 1) % @players.length
       return true
@@ -74,9 +74,9 @@ class Game
       1
     else if board.t == other
       0
-    else if Array.isArray board
-      Pws = (@rateBoard sub,t for sub in board)
-      Pls = (@rateBoard sub,other for sub in board)
+    else if board.d?
+      Pws = (@rateBoard sub,t for sub in board.d)
+      Pls = (@rateBoard sub,other for sub in board.d)
       Pw = @calculateProb Pws
       Pl = @calculateProb Pls
       if d
@@ -90,7 +90,7 @@ class Game
     @rateBoard @board,'X'
 
   open: ({i,j}) ->
-    @board[i][j].t == ''
+    @board.d[i].d[j].t == ''
 
   filterOpen: (moves) ->
     moves.filter @open.bind(this)

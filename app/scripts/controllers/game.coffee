@@ -39,17 +39,21 @@ module.exports =
               $scope.player = $scope.game.players[$scope.game.turn]
         #online game
         else
-          Games = $resource '/game/:id', {}, {move: {method: 'POST'}}
+          Games = $resource '/game/:id', {id:$routeParams.id},
+            move:
+              method: 'POST'
+              url: '/game/move/:id'
           # disable move until game loaded
           moveFn = $scope.move
           $scope.move = ->
           # load game
-          Games.get {id:$routeParams.id}, (game) ->
-            $scope.game = new Game game
-            $scope.move = moveFn
-            # send move to server
-            $scope.endTurn = (i,j) ->
-              game.$move {i:i,j:j}
+          Games.get {}, (res) ->
+            res.$promise.then (game) ->
+              $scope.game = new UTTT.Game game
+              $scope.move = moveFn
+              # send move to server
+              $scope.endTurn = (i,j) ->
+                game.$move {i:i,j:j,userID:$scope.user.id}
           # social network player info
           $scope.player = $scope.user
     ]

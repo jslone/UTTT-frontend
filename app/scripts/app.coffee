@@ -36,6 +36,7 @@ angular
 
 app = angular.module 'utttApp'
 
+require('./controllers/auth.coffee').init app
 require('./controllers/games.coffee').init app
 require('./controllers/game.coffee').init app
 require('./directives/subboard.coffee').init app
